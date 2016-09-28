@@ -3,5 +3,13 @@ class Account::GroupsController < ApplicationController
 
   def index
     @groups = current_user.participated_groups
-  end 
+  end
+
+  def destroy
+    @group = current_user.find(params[:id])
+    @group.destroy
+    flash[:alert] = "Posts deleted"
+
+    redirect_to group_post_path
+  end
 end
